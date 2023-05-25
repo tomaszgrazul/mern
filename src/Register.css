@@ -1,0 +1,42 @@
+.register-main {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-name, 
+.input-event,
+.input-city {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+#input-name {
+    width: 200px;
+    outline: none;
+}
+
+#input-event,
+#input-city {
+    width: 210px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+button {
+    width: 210px;
+    height: 25px;
+    background-color: rgb(156, 66, 66);
+    border: 0;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color:brown;
+    border: 0;
+}

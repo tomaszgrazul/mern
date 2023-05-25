@@ -7,19 +7,35 @@ class Register extends Component {
         super(props);
 
         this.state = {
-            register: []
+            register: [],
+            errorName: ''
         };
     }
 
     addUser = (event) => {
         event.preventDefault();
         
+        if (this.inputName.value === '') {    
+            this.state.errorName = "Wpisz imię i nazwisko !!!";
+        } else this.state.errorName = "";
+        // const validate = () => {
+        //     let a = true;
+        //     if (this.inputName.value === '') {    
+        //         this.state.errorName = "Wpisz imię i nazwisko !!!";
+        //         a = false
+        //     } else this.state.errorName = "";
+        //     return a ;
+        // }
+
+        // if(!validate()) {
+        //     return;
+        // }
 
         let newUser = {
-            id: Date.now(),
-            name: this._inputName.value,
-            event: this._inputName.value,
-            city: this._inputName.value
+            _id: Date.now(),
+            name: this.inputName.value,
+            event: this.selectEvent.value,
+            city: this.selectCity.value
         }
 
         console.log(newUser);
@@ -29,35 +45,62 @@ class Register extends Component {
                 register: state.register.concat(newUser)
             });
         })
+        
+        console.log(this.state.register);
 
-        this._inputName.value = '';
+        this.inputName.value = '';
+        this.selectEvent.value = '--';
+        this.selectCity.value = '--';
+
+
+            // if (newUser.event === '--') {
+            //     let errorEvent = false;
+            // }
+
+            // if (newUser.city === '--') {
+            //     let errorCity = false;
+            // }
+
+
     }
+
+
 
     render() {
         return (
 
             <div className="register-main">
-                <h1>User's List</h1>
+                <header>
+                    <h1>Zapisy na szkolenie</h1>
+                </header>
                 <form onSubmit={this.addUser}>
-                    <label htmlFor="name">Imię i Nazwisko</label>
-                    <input ref={(element) => {this._inputName = element;}} type="text" placeholder="Enter name" name="name"/>
+                    <div className="input-name">
+                        <label htmlFor="name">Imię i Nazwisko</label>
+                        <input ref={(element) => {this.inputName = element;}} type="text" placeholder="Imię i nazwisko" name="name" id="input-name"/>
+                        {/* {!this.state.errorName && <p>Wpisz imię i nazwisko</p>} */}
+                        {this.state.errorName && <p>{this.state.errorName}</p>}
+                    </div>
 
-                    <label htmlFor="event">Wydarzenie</label>
-                    <select name="event" id="event">
-                        <option value="--">--</option>
-                        <option value="one">Front End - RejactJS</option>
-                        <option value="two">Back End - Node.js</option>
-                        <option value="three">Full Stack - MERN</option>
-                        <option value="four">Tester Manualny</option>
-                    </select>
+                    <div className="input-event">
+                        <label htmlFor="event">Wydarzenie</label>
+                        <select name="event" id="input-event" ref={(element) => {this.selectEvent = element;}}>
+                            <option value="--">--</option>
+                            <option value="Front End - RejactJS">Front End - RejactJS</option>
+                            <option value="Back End - Node.js">Back End - Node.js</option>
+                            <option value="Full Stack - MERN">Full Stack - MERN</option>
+                            <option value="Tester Manualny">Tester Manualny</option>
+                        </select>
+                    </div>
 
-                    <label htmlFor="city">Miasto</label>
-                    <select name="city" id="city">
-                        <option value="--">--</option>
-                        <option value="one">Online</option>
-                        <option value="two">Warszawa</option>
-                        <option value="three">Kraków</option>
-                    </select>
+                    <div className="input-city">
+                        <label htmlFor="city">Miasto</label>
+                        <select name="city" id="input-city" ref={(element) => {this.selectCity = element;}}>
+                            <option value="--">--</option>
+                            <option value="Online">Online</option>
+                            <option value="Warszawa">Warszawa</option>
+                            <option value="Kraków">Kraków</option>
+                        </select>
+                    </div>
 
                     <button type="submit">Zapisz na szkolenie</button>
                 </form>
