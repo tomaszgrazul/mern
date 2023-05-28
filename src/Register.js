@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './Register.css';
+import axios from "axios";
 
 const Register = (props) => {
 
@@ -9,9 +10,15 @@ const Register = (props) => {
         usercity: ''
     });
 
+    const [errors, setErrors] = useState({
+        username: '',
+        userevent: '',
+        usercity: ''
+    });
+
+    const [register, setRegister] = useState([]);
 
     const handleInputChange = (e) => {
-        // console.log(e.target.value)
         const target = e.target;
         const name = target.name;
 
@@ -25,14 +32,36 @@ const Register = (props) => {
     const addUser = (event) => {
         event.preventDefault();
         
-    
 
-        // if (this.inputName.value === '') {    
-        //     this.state.errorName = "Wpisz imię i nazwisko !!!";
-        // } else this.state.errorName = "";
+        if (formData.username === '') {    
+            setErrors(() => {
+                return {
+                    username: "Wpisz imię i nazwisko !!!"
+                };
+            });
+            return;
+        } else setErrors('');
+
+        if (formData.userevent === '') {    
+            setErrors(() => {
+                return {
+                    userevent: "Wpisz wydarzenie !!!"
+                };
+            });
+            return;
+        } else setErrors('');
+
+        if (formData.usercity === '') {    
+            setErrors(() => {
+                return {
+                    usercity: "Wpisz miasto !!!"
+                };
+            });
+            return;
+        } else setErrors('');
 
 
-           let newUser = {
+        let newUser = {
             _id: Date.now(),
             name: formData.username,
             event: formData.userevent,
@@ -40,32 +69,34 @@ const Register = (props) => {
         }
 
         console.log(newUser);
+ 
+        setRegister(register.concat(newUser));
 
-        // this.setState((state) => {
-        //     return({
-        //         register: state.register.concat(newUser)
-        //     });
-        // })
-        
-        // console.log(this.state.register);
+        console.log(register);
+
         setFormData({
             username: '',
-            userevent: '--',
-            usercity: '--'
+            userevent: '',
+            usercity: ''
         });
-        
 
 
-            // if (newUser.event === '--') {
-            //     let errorEvent = false;
-            // }
+        axios
+        .post("http://localhost:3000", {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password
+        })
+        .then((res) => {
+            console.log(res.data);
+          
+         })
+        .catch((error) => {
+            console.error(error);
+        });
 
-            // if (newUser.city === '--') {
-            //     let errorCity = false;
-            // }
+    };
 
-
-    }
 
 
          return (
@@ -78,28 +109,30 @@ const Register = (props) => {
                     <div className="input-name">
                         <label htmlFor="username">Imię i Nazwisko</label>
                         <input onChange={handleInputChange} value={formData.username} type="text" placeholder="Imię i nazwisko" name="username" id="input-name"/>
-                        {/* {this.state.errorName && <p>{this.state.errorName}</p>} */}
+                        {errors.username && <p className="error">{errors.username}</p>}
                     </div>
 
                     <div className="input-event">
                         <label htmlFor="userevent">Wydarzenie</label>
                         <select name="userevent" id="input-event" onChange={handleInputChange} value={formData.userevent}>
-                            <option value="--">--</option>
+                            <option value="">--</option>
                             <option value="Front End - RejactJS">Front End - RejactJS</option>
                             <option value="Back End - Node.js">Back End - Node.js</option>
                             <option value="Full Stack - MERN">Full Stack - MERN</option>
                             <option value="Tester Manualny">Tester Manualny</option>
                         </select>
+                        {errors.userevent && <p className="error">{errors.userevent}</p>}
                     </div>
 
                     <div className="input-city">
                         <label htmlFor="usercity">Miasto</label>
                         <select name="usercity" id="input-city" onChange={handleInputChange} value={formData.usercity}>
-                            <option value="--">--</option>
+                            <option value="">--</option>
                             <option value="Online">Online</option>
                             <option value="Warszawa">Warszawa</option>
                             <option value="Kraków">Kraków</option>
                         </select>
+                        {errors.usercity && <p className="error">{errors.usercity}</p>}
                     </div>
 
                     <button type="submit">Zapisz na szkolenie</button>
