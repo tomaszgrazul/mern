@@ -82,11 +82,7 @@ const Register = (props) => {
 
 
         axios
-        .post("http://localhost:3000", {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password
-        })
+        .post("http://127.0.0.1:8080/")
         .then((res) => {
             console.log(res.data);
           
