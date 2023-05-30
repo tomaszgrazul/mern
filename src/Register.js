@@ -80,8 +80,13 @@ const Register = (props) => {
             usercity: ''
         });
 
-
+        // const axiosConfig = {
+        //     headers: {
+        //     'Content-Type': 'application/json; charset=utf-8'
+        //     }
+        // }
         axios
+        // .post("http://127.0.0.1:8080/", axiosConfig)
         .post("http://127.0.0.1:8080/")
         .then((res) => {
             console.log(res.data);
