@@ -13,6 +13,8 @@ app.use(express.json());
 
 app.use(cors())
 
+
+
 app.post('/', function(req, res) {
     
         User.find().lean().then((user) => {
@@ -22,6 +24,25 @@ app.post('/', function(req, res) {
     res.json(posts);
     });   
 });
+
+app.post('/add', function(req, res) {
+      
+    let newUser = new User(req.body);
+
+        console.log("qqqqq", newUser);
+        // newUser.save().then(() => {
+        //     res.json(newUser);
+        // }).catch((err) => {
+        //                 return res.json({ error: 'Get user error' });
+        //             });
+
+                    newUser.save().catch((err) => {
+                                    return res.json({ error: 'Get user error' });
+                                });
+                                res.json(newUser);
+});
+
+
 
 
 app.listen(8080, function(){
