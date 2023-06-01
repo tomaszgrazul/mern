@@ -15,33 +15,35 @@ app.use(cors())
 
 
 
-app.post('/', function(req, res) {
-    
-        User.find().lean().then((user) => {
-            res.json(user);
-            console.log(user);
-}).catch((err) => {
-    res.json(posts);
-    });   
-});
-
 app.post('/add', function(req, res) {
       
     let newUser = new User(req.body);
-
-        console.log("qqqqq", newUser);
-        // newUser.save().then(() => {
-        //     res.json(newUser);
-        // }).catch((err) => {
-        //                 return res.json({ error: 'Get user error' });
-        //             });
-
-                    newUser.save().catch((err) => {
-                                    return res.json({ error: 'Get user error' });
-                                });
-                                res.json(newUser);
+    const lastId = req.params.id;
+    res.locals.lastId = req.params.id;
+        console.log("Zapis do bazy z express", res.locals.lastId);
+        newUser
+        .save()
+        .then(() => {
+            res.json(newUser);
+        })
+        .catch((err) => {
+            return res.json({ error: 'Get user error' });
+        });
 });
 
+app.post('/', function(req, res) {
+    
+    User
+    .findById(res.locals.lastId)
+    .lean()
+    .then((user) => {
+        res.json(user);
+        console.log("Odczyt z bazy express", user);
+    })
+    .catch((err) => {
+        res.json(posts);
+    });   
+});
 
 
 

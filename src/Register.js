@@ -1,6 +1,8 @@
 import { useState } from "react";
 import './Register.css';
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 const Register = (props) => {
 
@@ -16,7 +18,9 @@ const Register = (props) => {
         usercity: ''
     });
 
-    const [register, setRegister] = useState([]);
+    // const [register, setRegister] = useState([]);
+
+    const [readData, setReadData] = useState();
 
     const handleInputChange = (e) => {
         const target = e.target;
@@ -68,11 +72,11 @@ const Register = (props) => {
             city: formData.usercity
         }
 
-        console.log(newUser);
+        // console.log(newUser);
  
-        setRegister(register.concat(newUser));
+        // setRegister(register.concat(newUser));
 
-        console.log(register);
+        // console.log(register);
 
         setFormData({
             username: '',
@@ -89,13 +93,22 @@ const Register = (props) => {
         // .post("http://127.0.0.1:8080/", axiosConfig)
         .post("http://127.0.0.1:8080/")
         .then((res) => {
-            console.log(res.data);
+            console.log("odczyt z bazy", res.data._id);
           
          })
         .catch((error) => {
             console.error(error);
         });
 
+        axios
+        .post("http://127.0.0.1:8080/add", newUser)
+        .then((res) => {
+            console.log("Zapis do bazy", res.data);
+          
+         })
+        .catch((error) => {
+            console.error(error);
+        });
     };
 
 
@@ -138,9 +151,30 @@ const Register = (props) => {
 
                     <button type="submit">Zapisz na szkolenie</button>
                 </form>
-            </div>
-        );
-    
+
+                <div className="register-table">
+                    <div className="container text-center">
+                        <div className="row my">
+                            <div className="col">
+                                <h3>Index</h3>
+                            </div>
+                            <div className="col col-md-auto">
+                                <h3>Imię i nazwisko</h3>
+                            </div>
+                            <div className="col">
+                                <h3>Wydarzenie</h3>
+                            </div>
+                            <div className="col">
+                                <h3>Miasto</h3>
+                            </div>
+                            <div className="col">
+                                <h3>Akcja</h3>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>          
+        );    
 }
 
 
