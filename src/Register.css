@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 50px;
 }
 
 .input-name, 
@@ -52,10 +53,10 @@ button:hover {
     background-color: azure;
 }
 
-.register-table {
+/* .register-table {
     height: 100%;
     margin-top: 50px;
-}
+} */
 
 .my {
     height: 50px;

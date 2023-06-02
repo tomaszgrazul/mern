@@ -18,9 +18,13 @@ const Register = (props) => {
         usercity: ''
     });
 
-    // const [register, setRegister] = useState([]);
+    const [register, setRegister] = useState([{
+        name: 'test',
+        event: 'test1',
+        city: 'test2'
+    }]);
 
-    const [readData, setReadData] = useState();
+    const [counter, setCounter] = useState(0);
 
     const handleInputChange = (e) => {
         const target = e.target;
@@ -36,6 +40,8 @@ const Register = (props) => {
     const addUser = (event) => {
         event.preventDefault();
         
+        setCounter(counter + 1);
+        // console.log("licznik", counter);
 
         if (formData.username === '') {    
             setErrors(() => {
@@ -73,10 +79,13 @@ const Register = (props) => {
         }
 
         // console.log(newUser);
- 
-        // setRegister(register.concat(newUser));
 
-        // console.log(register);
+        setRegister(register.concat(newUser));
+
+        console.log(register);
+
+        // console.log(register[0].name);
+  
 
         setFormData({
             username: '',
@@ -89,26 +98,26 @@ const Register = (props) => {
         //     'Content-Type': 'application/json; charset=utf-8'
         //     }
         // }
-        axios
-        // .post("http://127.0.0.1:8080/", axiosConfig)
-        .post("http://127.0.0.1:8080/")
-        .then((res) => {
-            console.log("odczyt z bazy", res.data._id);
+        // axios
+        // // .post("http://127.0.0.1:8080/", axiosConfig)
+        // .post("http://127.0.0.1:8080/")
+        // .then((res) => {
+        //     console.log("odczyt z bazy", res.data);
           
-         })
-        .catch((error) => {
-            console.error(error);
-        });
+        //  })
+        // .catch((error) => {
+        //     console.error(error);
+        // });
 
-        axios
-        .post("http://127.0.0.1:8080/add", newUser)
-        .then((res) => {
-            console.log("Zapis do bazy", res.data);
+        // axios
+        // .post("http://127.0.0.1:8080/add", newUser)
+        // .then((res) => {
+        //     // console.log("Zapis do bazy", res.data);
           
-         })
-        .catch((error) => {
-            console.error(error);
-        });
+        //  })
+        // .catch((error) => {
+        //     console.error(error);
+        // });
     };
 
 
@@ -173,6 +182,35 @@ const Register = (props) => {
                         </div>    
                     </div>
                 </div>
+
+                {register.map((item, i) => {
+                    // return <div key={i}>{item.name}</div>
+                    return
+                    <div key={i} className="register-table">
+                        <div className="container text-center">
+                            <div className="row my">
+                                <div className="col">
+                                    <h3>{counter}</h3>
+                                </div>
+                                <div className="col col-md-auto">
+                                    <h3>{item.name}</h3>
+                                </div>
+                                <div className="col">
+                                    <h3>{item.event}</h3>
+                                </div>
+                                <div className="col">
+                                    <h3>{item.city}</h3>
+                                </div>
+                                <div className="col">
+                                    <h3>Akcja</h3>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                })}
+                
+
+
             </div>          
         );    
 }

@@ -18,9 +18,7 @@ app.use(cors())
 app.post('/add', function(req, res) {
       
     let newUser = new User(req.body);
-    const lastId = req.params.id;
-    res.locals.lastId = req.params.id;
-        console.log("Zapis do bazy z express", res.locals.lastId);
+
         newUser
         .save()
         .then(() => {
@@ -31,19 +29,19 @@ app.post('/add', function(req, res) {
         });
 });
 
-app.post('/', function(req, res) {
+// app.post('/', function(req, res) {
     
-    User
-    .findById(res.locals.lastId)
-    .lean()
-    .then((user) => {
-        res.json(user);
-        console.log("Odczyt z bazy express", user);
-    })
-    .catch((err) => {
-        res.json(posts);
-    });   
-});
+//     User
+//     .find()
+//     .lean()
+//     .then((user) => {
+//         res.json(user);
+//         console.log("Odczyt z bazy express", user);
+//     })
+//     .catch((err) => {
+//         res.json(posts);
+//     });   
+// });
 
 
 
