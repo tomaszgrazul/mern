@@ -40,10 +40,7 @@ const Register = (props) => {
     const addUser = (event) => {
         event.preventDefault();
         
-        setCounter(counter + 1);
-        // console.log("licznik", counter);
-
-        if (formData.username === '') {    
+         if (formData.username === '') {    
             setErrors(() => {
                 return {
                     username: "Wpisz imię i nazwisko !!!"
@@ -185,29 +182,29 @@ const Register = (props) => {
 
                 {register.map((item, i) => {
                     // return <div key={i}>{item.name}</div>
-                    return
-                    <div key={i} className="register-table">
-                        <div className="container text-center">
-                            <div className="row my">
-                                <div className="col">
-                                    <h3>{counter}</h3>
-                                </div>
-                                <div className="col col-md-auto">
-                                    <h3>{item.name}</h3>
-                                </div>
-                                <div className="col">
-                                    <h3>{item.event}</h3>
-                                </div>
-                                <div className="col">
-                                    <h3>{item.city}</h3>
-                                </div>
-                                <div className="col">
-                                    <h3>Akcja</h3>
-                                </div>
-                            </div>    
+                    return (
+                        <div key={i} className="register-table">
+                            <div className="container text-center">
+                                <div className="row my">
+                                    <div className="col">
+                                        <h3>{i}</h3>
+                                    </div>
+                                    <div className="col col-md-auto">
+                                        <h3>{item.name}</h3>
+                                    </div>
+                                    <div className="col">
+                                        <h3>{item.event}</h3>
+                                    </div>
+                                    <div className="col">
+                                        <h3>{item.city}</h3>
+                                    </div>
+                                    <div className="col">
+                                        <h3>Akcja</h3>
+                                    </div>
+                                </div>    
+                            </div>
                         </div>
-                    </div>
-                })}
+                    )})}
                 
 
 
