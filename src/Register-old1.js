@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './Register.css';
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 const Register = (props) => {
@@ -18,9 +19,9 @@ const Register = (props) => {
     });
 
     const [register, setRegister] = useState([{
-        name: '',
-        event: '',
-        city: ''
+        name: 'test',
+        event: 'test1',
+        city: 'test2'
     }]);
 
     const [counter, setCounter] = useState(0);
@@ -78,7 +79,7 @@ const Register = (props) => {
 
         setRegister(register.concat(newUser));
 
-        // console.log(register);
+        console.log(register);
 
         // console.log(register[0].name);
   
@@ -156,20 +157,79 @@ const Register = (props) => {
 
                     <button type="submit">Zapisz na szkolenie</button>
                 </form>
-           
+
+                {/* <div className="register-table">
+                    <div className="container text-center">
+                        <div className="row my">
+                            <div className="col">
+                                <h3>Index</h3>
+                            </div>
+                            <div className="col col-md-auto">
+                                <h3>Imię i nazwisko</h3>
+                            </div>
+                            <div className="col">
+                                <h3>Wydarzenie</h3>
+                            </div>
+                            <div className="col">
+                                <h3>Miasto</h3>
+                            </div>
+                            <div className="col">
+                                <h3>Akcja</h3>
+                            </div>
+                        </div>    
+                    </div>
+                </div> */}
+
+                {/* {register.map((item, i) => {
+                    // return <div key={i}>{item.name}</div>
+                    return (
+                        <div key={i} className="register-table">
+                            <div className="container text-center">
+                                <div className="row my">
+                                    <div className="col">
+                                        <h3>{i}</h3>
+                                    </div>
+                                    <div className="col col-md-auto">
+                                        <h3>{item.name}</h3>
+                                    </div>
+                                    <div className="col col-md-auto">
+                                        <h3>{item.event}</h3>
+                                    </div>
+                                    <div className="col">
+                                        <h3>{item.city}</h3>
+                                    </div>
+                                    <div className="col">
+                                        <h3>Akcja</h3>
+                                    </div>
+                                </div>    
+                            </div>
+                        </div>
+                    )
+                })} */}
                 
                 <table>
                     <tbody>
                         <tr><th className="index">L.P.</th><th className="name">Imię i nazwisko</th><th className="event">Wydarzenie</th><th className="city">Miasto</th><th className="action">Akcja</th></tr>
                         {register.map((item, i) => {
-                            if (i > 0) {
-                                return (
-                                    <tr key={i}><td className="index">{i}</td><td className="name">{item.name}</td><td className="event">{item.event}</td><td className="city">{item.city}</td><td className="action"><button className="btn-delete">Usuń</button></td></tr>
-                                )
-                            }       
-                            })}    
+                            return (
+                            <tr><td className="index">{i}</td><td className="name">{item.name}</td><td className="event">{item.event}</td><td className="city">{item.city}</td><td className="action">Akcja</td></tr>
+                            )
+                        })}
                     </tbody>
                 </table>
+
+
+                 {/* {register.map((item, i) => {
+                    return (
+                <table key={i}>
+                    <tbody>
+
+                        
+                        <tr><td className="index">{i}</td><td className="name">{item.name}</td><td className="event">{item.event}</td><td className="city">{item.city}</td><td className="action">Akcja</td></tr>
+                        
+                    </tbody>
+                </table>)
+               })} */}
 
             </div>          
         );    

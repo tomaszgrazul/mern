@@ -38,7 +38,7 @@ button {
 
 button:hover {
     cursor: pointer;
-    background-color:brown;
+    background-color:rgb(197, 79, 79);
     border: 0;
 }
 
@@ -64,3 +64,33 @@ button:hover {
     justify-content: center; */
     align-items: center;
 }
+
+th, td {
+    border: 1px, solid, black;  
+    height: 50px; 
+}
+
+.index {
+    width: 20px;
+}
+
+.name {
+    width: 180px;
+}
+
+.event {
+    width: 150px;
+}
+
+.city {
+    width: 150px;
+}
+
+.action {
+    width: 100px;
+}
+
+.btn-delete {
+    width: 50px;
+}
+
