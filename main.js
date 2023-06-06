@@ -44,6 +44,19 @@ app.post('/add', function(req, res) {
 // });
 
 
+app.post('/del', function(req, res) {
+console.log("id z del ",req.body );
+    User.findByIdAndDelete(req.body).then((post)=>{
+        res.json({ delete: true});
+
+    }).catch((err) => {
+        res.json({ error: 'Delete post error' });
+        });
+});
+
+
+
+
 
 app.listen(8080, function(){
     console.log('Serwer Register działa');

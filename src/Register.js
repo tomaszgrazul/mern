@@ -105,17 +105,33 @@ const Register = (props) => {
         //     console.error(error);
         // });
 
-        // axios
-        // .post("http://127.0.0.1:8080/add", newUser)
-        // .then((res) => {
-        //     // console.log("Zapis do bazy", res.data);
+        axios
+        .post("http://127.0.0.1:8080/add", newUser)
+        .then((res) => {
+            // console.log("Zapis do bazy", res.data);
           
-        //  })
-        // .catch((error) => {
-        //     console.error(error);
-        // });
+         })
+        .catch((error) => {
+            console.error(error);
+        });
     };
 
+
+    const deleteUser = (id) => {
+        // event.preventDefault();
+
+        console.log('id= ', id)
+
+        axios
+        .post("http://127.0.0.1:8080/del", id) 
+        .then((res) => {
+                console.log("Usuwanie z bazy", res.data);
+              
+             })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 
 
          return (
@@ -164,7 +180,18 @@ const Register = (props) => {
                         {register.map((item, i) => {
                             if (i > 0) {
                                 return (
-                                    <tr key={i}><td className="index">{i}</td><td className="name">{item.name}</td><td className="event">{item.event}</td><td className="city">{item.city}</td><td className="action"><button className="btn-delete">Usuń</button></td></tr>
+                                    <tr key={i}><td className="index">{i}</td><td className="name">{item.name}</td><td className="event">{item.event}</td><td className="city">{item.city}</td><td className="action">
+                                        <button onClick={() => {
+                                                var filtered = register.filter(
+                                                    (el, i) =>
+                                                    i !== register.findIndex((el) => el === item)
+                                                );
+                                                setRegister(filtered);
+                                                // console.log("filtered", filtered);
+                                                deleteUser(item._id);
+                                            }}
+                                            className="btn-delete">Usuń
+                                        </button></td></tr>
                                 )
                             }       
                             })}    
