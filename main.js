@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const User = require('./api/models/UserModel');
-var cors = require('cors')
+var cors = require('cors');
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/register');
@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 
-app.use(cors())
+app.use(cors());
 
 
 
@@ -45,17 +45,17 @@ app.post('/add', function(req, res) {
 
 
 app.post('/del', function(req, res) {
-console.log("id z del ",req.body );
-    User.findByIdAndDelete(req.body).then((post)=>{
+// console.log("id z del ",req.body.id );
+// console.log("User:  ", User);
+    User.
+    findByIdAndDelete(req.body.id)
+    .then((post)=>{
         res.json({ delete: true});
 
     }).catch((err) => {
         res.json({ error: 'Delete post error' });
         });
 });
-
-
-
 
 
 app.listen(8080, function(){

@@ -120,12 +120,12 @@ const Register = (props) => {
     const deleteUser = (id) => {
         // event.preventDefault();
 
-        console.log('id= ', id)
+        // console.log('id= ', id)
 
         axios
-        .post("http://127.0.0.1:8080/del", id) 
+        .post("http://127.0.0.1:8080/del", {id: id}) 
         .then((res) => {
-                console.log("Usuwanie z bazy", res.data);
+                // console.log("Usuwanie z bazy", res.data);
               
              })
             .catch((error) => {
@@ -133,8 +133,7 @@ const Register = (props) => {
             });
     }
 
-
-         return (
+            return (
 
             <div className="register-main">
                 <header>
@@ -182,6 +181,7 @@ const Register = (props) => {
                                 return (
                                     <tr key={i}><td className="index">{i}</td><td className="name">{item.name}</td><td className="event">{item.event}</td><td className="city">{item.city}</td><td className="action">
                                         <button onClick={() => {
+                                            alert('Czy na pewno usunąć?');
                                                 var filtered = register.filter(
                                                     (el, i) =>
                                                     i !== register.findIndex((el) => el === item)

@@ -64,14 +64,25 @@ button:hover {
     justify-content: center; */
     align-items: center;
 }
+table {
+    border-collapse: collapse;
+    margin: 50px;
+}
 
-th, td {
-    border: 1px, solid, black;  
+table th{
+    border: 1px solid black;  
+    height: 50px; 
+    background-color: rgb(238, 194, 194);
+}
+
+table td{
+    border: 1px solid black;  
     height: 50px; 
 }
 
+
 .index {
-    width: 20px;
+    width: 30px;
 }
 
 .name {
