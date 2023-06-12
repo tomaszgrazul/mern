@@ -3,6 +3,7 @@ import './Register.css';
 import axios from "axios";
 
 
+
 const Register = (props) => {
 
     const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Register = (props) => {
         city: ''
     }]);
 
-    const [counter, setCounter] = useState(0);
+    // const [openModal, setOpenModal] = useState(false);
 
     const handleInputChange = (e) => {
         const target = e.target;
@@ -181,9 +182,9 @@ const Register = (props) => {
                                 return (
                                     <tr key={i}><td className="index">{i}</td><td className="name">{item.name}</td><td className="event">{item.event}</td><td className="city">{item.city}</td><td className="action">
                                         <button onClick={() => {
-                                            alert('Czy na pewno usunąć?');
-                                                var filtered = register.filter(
-                                                    (el, i) =>
+                                            // alert('Czy na pewno usunąć?');
+                                            props.setOpenModalMethod(true);
+                                                var filtered = register.filter((el, i) =>
                                                     i !== register.findIndex((el) => el === item)
                                                 );
                                                 setRegister(filtered);
