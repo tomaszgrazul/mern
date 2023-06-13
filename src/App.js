@@ -1,20 +1,23 @@
 import './App.css';
 import { useState } from 'react';
 import Register from './Register';
-import Modal from './Components/Modal';
+// import Modal from './Components/Modal';
 
 function App() {
 
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
 
-  setOpenModal = () => {
-    console.log('setOpenModal=', openModal);
-  }
+  // const useOpenModal = (e) => {
+  //   console.log('setOpenModal=', e);
+  //   setOpenModal(e);
+  // }
 
   return (
     <div className="App">
-       <Register setOpenModalMethod={setOpenModal}/>
-       <Modal />
+       {/* <Register setOpenModalMethod={useOpenModal}/> */}
+       {/* <Register setOpenModalMethod={(e) => setOpenModal(e)}/> */}
+       <Register /> 
+       {/* {openModal && <Modal setModal={setOpenModal}/>} */}
     </div>
   );
 }

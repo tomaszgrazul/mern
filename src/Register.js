@@ -1,6 +1,8 @@
 import { useState } from "react";
 import './Register.css';
 import axios from "axios";
+import Modal from "./Components/Modal";
+import { useEffect } from "react";
 
 
 
@@ -24,7 +26,13 @@ const Register = (props) => {
         city: ''
     }]);
 
-    // const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+    const [delModal, setDelModal] = useState(false);
+
+    useEffect(() => {
+        console.log("delModal=", delModal);
+        console.log("openModal=", openModal);
+    }, [delModal, openModal])
 
     const handleInputChange = (e) => {
         const target = e.target;
@@ -183,13 +191,21 @@ const Register = (props) => {
                                     <tr key={i}><td className="index">{i}</td><td className="name">{item.name}</td><td className="event">{item.event}</td><td className="city">{item.city}</td><td className="action">
                                         <button onClick={() => {
                                             // alert('Czy na pewno usunąć?');
-                                            props.setOpenModalMethod(true);
+                                            // props.setOpenModalMethod(true);
+                                            setOpenModal(true);
+                                            setDelModal(true);
+                                            console.log("delModal bezhook=", delModal);
+                                            console.log("openModal bezhook=", openModal);
+                                            if(!delModal) {
+                                                console.log('Usunięte!');
                                                 var filtered = register.filter((el, i) =>
                                                     i !== register.findIndex((el) => el === item)
                                                 );
                                                 setRegister(filtered);
                                                 // console.log("filtered", filtered);
                                                 deleteUser(item._id);
+                                            }
+                                                
                                             }}
                                             className="btn-delete">Usuń
                                         </button></td></tr>
@@ -198,7 +214,7 @@ const Register = (props) => {
                             })}    
                     </tbody>
                 </table>
-
+                {openModal && delModal && <Modal setModal={setOpenModal} setDelete={setDelModal}/>}
             </div>          
         );    
 }
