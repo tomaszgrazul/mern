@@ -28,11 +28,14 @@ const Register = (props) => {
 
     const [openModal, setOpenModal] = useState(false);
     const [delModal, setDelModal] = useState(false);
+    const [del, setDel] = useState(false);
 
     useEffect(() => {
         console.log("delModal=", delModal);
-        console.log("openModal=", openModal);
-    }, [delModal, openModal])
+
+        setDel(delModal);
+        console.log("del=", del);
+    }, [delModal])
 
     const handleInputChange = (e) => {
         const target = e.target;
@@ -196,7 +199,7 @@ const Register = (props) => {
                                             setDelModal(true);
                                             console.log("delModal bezhook=", delModal);
                                             console.log("openModal bezhook=", openModal);
-                                            if(!delModal) {
+                                            if(!del) {
                                                 console.log('Usunięte!');
                                                 var filtered = register.filter((el, i) =>
                                                     i !== register.findIndex((el) => el === item)
