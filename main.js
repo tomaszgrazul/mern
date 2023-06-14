@@ -15,49 +15,10 @@ app.use(cors());
 
 
 
-app.post('/add', function(req, res) {
-      
-    let newUser = new User(req.body);
-
-        newUser
-        .save()
-        .then(() => {
-            res.json(newUser);
-        })
-        .catch((err) => {
-            return res.json({ error: 'Get user error' });
-        });
-});
-
-// app.post('/', function(req, res) {
-    
-//     User
-//     .find()
-//     .lean()
-//     .then((user) => {
-//         res.json(user);
-//         console.log("Odczyt z bazy express", user);
-//     })
-//     .catch((err) => {
-//         res.json(posts);
-//     });   
-// });
+const userRouter = require('./api/routes/userRoutes');
+app.use('/', userRouter);
 
 
-app.post('/del', function(req, res) {
-// console.log("id z del ",req.body.id );
-// console.log("User:  ", User);
-    User.
-    findByIdAndDelete(req.body.id)
-    .then((post)=>{
-        res.json({ delete: true});
-
-    }).catch((err) => {
-        res.json({ error: 'Delete post error' });
-        });
-});
-
-
-app.listen(8080, function(){
+app.listen(8080, function() {
     console.log('Serwer Register działa');
 });

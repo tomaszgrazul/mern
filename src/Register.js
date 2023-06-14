@@ -2,7 +2,6 @@ import { useState } from "react";
 import './Register.css';
 import axios from "axios";
 import Modal from "./Components/Modal";
-import { useEffect } from "react";
 
 
 const Register = (props) => {
