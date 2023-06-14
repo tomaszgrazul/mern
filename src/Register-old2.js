@@ -5,6 +5,7 @@ import Modal from "./Components/Modal";
 import { useEffect } from "react";
 
 
+
 const Register = (props) => {
 
     const [formData, setFormData] = useState({
@@ -26,7 +27,16 @@ const Register = (props) => {
     }]);
 
     const [openModal, setOpenModal] = useState(false);
+    // const [delModal, setDelModal] = useState(false);
+    const [del, setDel] = useState(false);
     const [itemToDelete, setItemToDelete] = useState(null);
+
+    // useEffect(() => {
+    //     console.log("delModal=", delModal);
+
+    //     setDel(delModal);
+    //     console.log("del=", del);
+    // }, [delModal])
 
     const handleDelete = () => {
         console.log('Usunięte!');
@@ -34,9 +44,11 @@ const Register = (props) => {
             i !== register.findIndex((el) => el === itemToDelete)
         );
         setRegister(filtered);
+        // console.log("filtered", filtered);
         deleteUser(itemToDelete._id);
         setItemToDelete(null);
         setOpenModal(false);
+
     }
 
     const handleInputChange = (e) => {
@@ -88,7 +100,14 @@ const Register = (props) => {
             city: formData.usercity
         }
 
+        // console.log(newUser);
+
         setRegister(register.concat(newUser));
+
+        // console.log(register);
+
+        // console.log(register[0].name);
+  
 
         setFormData({
             username: '',
@@ -96,10 +115,27 @@ const Register = (props) => {
             usercity: ''
         });
 
+        // const axiosConfig = {
+        //     headers: {
+        //     'Content-Type': 'application/json; charset=utf-8'
+        //     }
+        // }
+        // axios
+        // // .post("http://127.0.0.1:8080/", axiosConfig)
+        // .post("http://127.0.0.1:8080/")
+        // .then((res) => {
+        //     console.log("odczyt z bazy", res.data);
+          
+        //  })
+        // .catch((error) => {
+        //     console.error(error);
+        // });
+
         axios
         .post("http://127.0.0.1:8080/add", newUser)
         .then((res) => {
-         
+            // console.log("Zapis do bazy", res.data);
+          
          })
         .catch((error) => {
             console.error(error);
@@ -108,11 +144,15 @@ const Register = (props) => {
 
 
     const deleteUser = (id) => {
+        // event.preventDefault();
+
+        // console.log('id= ', id)
 
         axios
         .post("http://127.0.0.1:8080/del", {id: id}) 
         .then((res) => {
-                              
+                // console.log("Usuwanie z bazy", res.data);
+              
              })
             .catch((error) => {
                 console.error(error);
@@ -167,9 +207,24 @@ const Register = (props) => {
                                 return (
                                     <tr key={i}><td className="index">{i}</td><td className="name">{item.name}</td><td className="event">{item.event}</td><td className="city">{item.city}</td><td className="action">
                                         <button onClick={() => {
-
-                                                setItemToDelete(item);
-                                                setOpenModal(true);                                                                         
+                                            // alert('Czy na pewno usunąć?');
+                                            // props.setOpenModalMethod(true);
+                                            setItemToDelete(item);
+                                            setOpenModal(true);
+                                            // setDelModal(true);
+                                            // console.log("delModal bezhook=", delModal);
+                                            console.log("openModal bezhook=", openModal);
+                                            console.log("del bezhook=", del);
+                                            if(del) {
+                                                // console.log('Usunięte!');
+                                                // var filtered = register.filter((el, i) =>
+                                                //     i !== register.findIndex((el) => el === item)
+                                                // );
+                                                // setRegister(filtered);
+                                                // // console.log("filtered", filtered);
+                                                // deleteUser(item._id);
+                                            }
+                                                
                                             }}
                                             className="btn-delete">Usuń
                                         </button></td></tr>
@@ -182,5 +237,6 @@ const Register = (props) => {
             </div>          
         );    
 }
+
 
 export default Register;
