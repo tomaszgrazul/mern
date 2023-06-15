@@ -28,7 +28,7 @@ const Register = (props) => {
     const [itemToDelete, setItemToDelete] = useState(null);
 
     const handleDelete = () => {
-        console.log('Usunięte!');
+
         var filtered = register.filter((el, i) =>
             i !== register.findIndex((el) => el === itemToDelete)
         );
@@ -87,7 +87,7 @@ const Register = (props) => {
             city: formData.usercity
         }
 
-        setRegister(register.concat(newUser));
+        // setRegister(register.concat(newUser));
 
         setFormData({
             username: '',
@@ -103,8 +103,16 @@ const Register = (props) => {
         .catch((error) => {
             console.error(error);
         });
-    };
 
+        axios
+        .post("http://127.0.0.1:8080/read", {id: newUser._id}) 
+        .then((res) => { 
+            setRegister(register.concat(res.data));      
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    };
 
     const deleteUser = (id) => {
 
@@ -118,7 +126,8 @@ const Register = (props) => {
             });
     }
 
-            return (
+
+        return (
 
             <div className="register-main">
                 <header>

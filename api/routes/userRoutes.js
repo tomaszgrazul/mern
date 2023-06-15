@@ -7,4 +7,6 @@ router.post('/add', postController.add);
 
 router.post('/del', postController.del);
 
+router.post('/read', postController.read);
+
 module.exports = router;

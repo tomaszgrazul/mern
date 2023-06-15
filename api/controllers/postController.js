@@ -21,11 +21,24 @@ module.exports = {
 
         User.
         findByIdAndDelete(req.body.id)
-        .then((post)=>{
+        .then(()=>{
             res.json({ delete: true});
         })
         .catch((err) => {
             res.json({ error: 'Delete post error' });
         });
+    },
+
+    read: (req, res) => {
+
+        User
+        .findById(req.body.id)
+        .lean()
+        .then((user) => {
+            res.json(user);
+        })
+        .catch((err) => {
+            res.json({ error: 'Read post error' });
+        }); 
     }
 };
